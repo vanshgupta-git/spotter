@@ -25,8 +25,14 @@ Built strictly to the requirements of the Spotter Full-Stack Technical Assessmen
   - **No-Travel Exclusion**: Disqualifies hazardous routes encountering No-Travel weather from safe recommendations; issues a critical dispatcher alert if all corridors are unsafe.
 - **0–48 Hour Interactive Forecast Timeline & Heatmap**: Slider scrubs through 48 hours of corridor weather with live heatmap circle overlays and play/pause timeline progression.
 - **Interactive Leaflet Transportation Map**: Multi-route polylines with custom colors, interactive risk-coded checkpoint popups, and dark-themed UI.
+- **Programmatic Walkthrough Video**: Rendered using Remotion (`walkthrough/out/spotter-walkthrough.mp4`), demonstrating all mathematical thresholds, load overrides, and UI interactions.
 
 ---
+
+## Walkthrough Video
+The full walkthrough video created with Remotion is included directly in this repository:
+- **Video File**: [`walkthrough/out/spotter-walkthrough.mp4`](walkthrough/out/spotter-walkthrough.mp4)
+- **Source Code**: [`walkthrough/src/`](walkthrough/src/)
 
 ## 2. Technology Stack & Strict Zero-Cost Architecture
 
