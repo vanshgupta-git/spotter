@@ -24,11 +24,15 @@ SECRET_KEY = os.getenv(
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 'yes')
 
 # Allowed hosts configuration
-env_allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS', '')
+env_allowed_hosts = os.getenv('DJANGO_ALLOWED_HOSTS', '*')
 if env_allowed_hosts:
     ALLOWED_HOSTS = [h.strip() for h in env_allowed_hosts.split(',') if h.strip()]
 else:
-    ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0', '.vercel.app', '.onrender.com']
+    ALLOWED_HOSTS = ['*']
+
+render_hostname = os.getenv('RENDER_EXTERNAL_HOSTNAME')
+if render_hostname and render_hostname not in ALLOWED_HOSTS:
+    ALLOWED_HOSTS.append(render_hostname)
 
 if DEBUG and '*' not in ALLOWED_HOSTS:
     ALLOWED_HOSTS.append('*')

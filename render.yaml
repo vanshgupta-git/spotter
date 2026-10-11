@@ -14,7 +14,7 @@ services:
       - key: SECRET_KEY
         generateValue: true
       - key: DJANGO_ALLOWED_HOSTS
-        value: ".onrender.com,localhost,127.0.0.1"
+        value: "*"
       - key: CORS_ALLOW_ALL_ORIGINS
         value: "True"
       - key: ROUTING_PROVIDER
