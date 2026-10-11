@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: spotter-backend
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: bash build.sh
+    startCommand: gunicorn --chdir backend spotter_project.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_ALLOWED_HOSTS
+        value: ".onrender.com,localhost,127.0.0.1"
+      - key: CORS_ALLOW_ALL_ORIGINS
+        value: "True"
+      - key: ROUTING_PROVIDER
+        value: "osrm"
+      - key: OPEN_METEO_BASE_URL
+        value: "https://api.open-meteo.com/v1/forecast"
+      - key: OPEN_METEO_GEOCODING_URL
+        value: "https://geocoding-api.open-meteo.com/v1/search"

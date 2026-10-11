@@ -59,28 +59,38 @@ The project uses single-page application structure. If deep links are used, add 
 
 ## 3. Backend Deployment on Free Python Hosting (Render / Railway / Vercel)
 
-### Option A: Render Free Web Service (Recommended for Django)
-Render offers a free tier for Python web services with 750 free instance hours per month.
+### Option A: Render Free Web Service via Blueprint (Easiest - 1 Click)
+Render automatically detects `render.yaml` in the root of the repository:
 
-1. Sign up at [render.com](https://render.com).
-2. Click **New +** > **Web Service**.
-3. Connect your GitHub repository.
-4. Configure settings:
-   - **Name**: `spotter-backend`
-   - **Root Directory**: `backend`
-   - **Environment**: `Python 3`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn spotter_project.wsgi:application --bind 0.0.0.0:$PORT` (or `python manage.py runserver 0.0.0.0:$PORT`)
-   - **Instance Type**: `Free`
-5. **Environment Variables**:
+1. Sign up or log in at [dashboard.render.com](https://dashboard.render.com).
+2. Click **New +** > **Blueprint**.
+3. Connect your GitHub repository (`https://github.com/vanshgupta-git/spotter`).
+4. Render automatically parses `render.yaml` and configures:
+   - **Service Name**: `spotter-backend`
+   - **Runtime**: Python 3.12
+   - **Plan**: Free (750 free hours/month)
+   - **Build Command**: `bash build.sh` (installs requirements, collects static assets via WhiteNoise, runs migrations)
+   - **Start Command**: `gunicorn --chdir backend spotter_project.wsgi:application --bind 0.0.0.0:$PORT`
+   - **Environment Variables**: Automatic `SECRET_KEY`, `DJANGO_ALLOWED_HOSTS`, `CORS_ALLOW_ALL_ORIGINS=True`.
+5. Click **Apply**. Within ~2 minutes, your backend will be live at `https://spotter-backend-<unique-id>.onrender.com`!
+
+### Option B: Render Manual Web Service
+Alternatively, you can set it up manually:
+1. Click **New +** > **Web Service** on Render.
+2. Select your repository.
+3. Configure:
+   - **Root Directory**: leave blank (repo root)
+   - **Runtime**: `Python 3`
+   - **Build Command**: `bash build.sh`
+   - **Start Command**: `gunicorn --chdir backend spotter_project.wsgi:application --bind 0.0.0.0:$PORT`
+   - **Plan**: `Free`
+4. In **Environment Variables**:
    - `DEBUG`: `False`
-   - `SECRET_KEY`: Generate a random 50-character string
    - `DJANGO_ALLOWED_HOSTS`: `.onrender.com,localhost,127.0.0.1`
-   - `CORS_ALLOWED_ORIGINS`: `https://your-frontend.vercel.app,http://localhost:5173`
-   - `CORS_ALLOW_ALL_ORIGINS`: `False`
-6. Click **Create Web Service**. Your API will be live at `https://spotter-backend.onrender.com`.
+   - `CORS_ALLOW_ALL_ORIGINS`: `True`
+5. Click **Create Web Service**.
 
-### Option B: Vercel Serverless Python Backend
+### Option C: Vercel Serverless Python Backend
 If deploying both frontend and backend on Vercel:
 1. The repository includes `wsgi.py` exporting `app = application`, compatible with Vercel's Python WSGI runtime.
 2. In `vercel.json` at project root:
