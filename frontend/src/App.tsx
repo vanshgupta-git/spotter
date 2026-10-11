@@ -58,15 +58,15 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col font-sans">
+    <div className="min-h-screen bg-slate-100 text-slate-800 flex flex-col font-sans">
       <Header onToggleInfo={() => setIsRulesModalOpen(true)} />
 
       <main className="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8 space-y-6">
         {/* Error Banner */}
         {errorMessage && (
-          <div className="p-4 rounded-xl bg-red-950/80 border border-red-700 text-red-200 text-sm flex items-center justify-between shadow-lg">
+          <div className="p-4 rounded-xl bg-red-50 border border-red-200 text-red-900 text-sm flex items-center justify-between shadow-xs">
             <div className="flex items-center space-x-3">
-              <AlertCircle className="w-5 h-5 text-red-400 shrink-0" />
+              <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
               <span>{errorMessage}</span>
             </div>
             <button
@@ -80,7 +80,7 @@ export const App: React.FC = () => {
                   interval_miles: 25,
                 });
               }}
-              className="px-3 py-1.5 rounded-lg bg-red-900 hover:bg-red-800 text-white text-xs font-medium flex items-center space-x-1.5 border border-red-700"
+              className="px-3 py-1.5 rounded-lg bg-red-600 hover:bg-red-700 text-white text-xs font-semibold flex items-center space-x-1.5 shadow-2xs"
             >
               <RefreshCw className="w-3.5 h-3.5" />
               <span>Retry</span>
@@ -127,9 +127,9 @@ export const App: React.FC = () => {
                 corridorHeatmap={tripData.corridor_heatmap || []}
               />
             ) : (
-              <div className="w-full h-[600px] rounded-xl border border-slate-800 bg-slate-900/60 flex flex-col items-center justify-center text-slate-400 p-6 text-center">
-                <Compass className="w-12 h-12 text-slate-600 mb-3 animate-pulse" />
-                <h3 className="text-base font-semibold text-slate-300">Awaiting Trip Parameters</h3>
+              <div className="w-full h-[600px] rounded-xl border border-slate-200 bg-white flex flex-col items-center justify-center text-slate-500 p-6 text-center shadow-xs">
+                <Compass className="w-12 h-12 text-slate-400 mb-3" />
+                <h3 className="text-base font-bold text-slate-800">Awaiting Trip Parameters</h3>
                 <p className="text-xs text-slate-500 max-w-sm mt-1">
                   Enter an origin and destination or pick a preset corridor to generate 3 alternative routes with weather risk sampling.
                 </p>
@@ -146,8 +146,8 @@ export const App: React.FC = () => {
       />
 
       {/* Footer */}
-      <footer className="border-t border-slate-900 py-4 text-center text-xs text-slate-400">
-        <p>Spotter Weather-Aware Truck Routing • Built with React, Vite, Tailwind CSS, Leaflet & Django • 100% Free Tiers</p>
+      <footer className="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500">
+        <p>Spotter Commercial Truck Fleet Dispatch • Built with React, Vite, Tailwind CSS, Leaflet & Django • 100% Free Tiers</p>
       </footer>
     </div>
   );

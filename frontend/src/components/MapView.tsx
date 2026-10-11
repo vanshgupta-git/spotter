@@ -52,7 +52,7 @@ export const MapView: React.FC<MapViewProps> = ({
   const activeRoute = routes.find((r) => r.id === selectedRouteId) || routes[0];
 
   return (
-    <div className="relative w-full h-[600px] lg:h-[720px] rounded-xl overflow-hidden border border-slate-800 shadow-2xl bg-slate-950">
+    <div className="relative w-full h-[600px] lg:h-[720px] rounded-xl overflow-hidden border border-slate-200 shadow-md bg-white">
       <MapContainer
         center={[39.8283, -98.5795]}
         zoom={4}
@@ -177,22 +177,22 @@ export const MapView: React.FC<MapViewProps> = ({
               }}
             >
               <Popup>
-                <div className="p-1 text-slate-100 text-xs space-y-2 min-w-[210px]">
+                <div className="p-1 text-slate-800 text-xs space-y-2 min-w-[210px]">
                   {/* Header */}
-                  <div className="border-b border-slate-700 pb-1.5 flex items-center justify-between">
-                    <span className="font-bold text-white flex items-center">
-                      <MapPin className="w-3.5 h-3.5 mr-1 text-emerald-400" />
+                  <div className="border-b border-slate-200 pb-1.5 flex items-center justify-between">
+                    <span className="font-bold text-slate-900 flex items-center">
+                      <MapPin className="w-3.5 h-3.5 mr-1 text-blue-600" />
                       {cp.name}
                     </span>
-                    <span className="font-mono text-[11px] text-slate-300">
+                    <span className="font-mono text-[11px] text-slate-500">
                       Mile {cp.distance_miles.toFixed(1)}
                     </span>
                   </div>
 
                   {/* Arrival ETA */}
-                  <div className="flex items-center text-slate-300">
-                    <Clock className="w-3 h-3 mr-1 text-sky-400 shrink-0" />
-                    <span>ETA: <strong className="text-white">{cp.eta_display}</strong></span>
+                  <div className="flex items-center text-slate-600">
+                    <Clock className="w-3 h-3 mr-1 text-blue-600 shrink-0" />
+                    <span>ETA: <strong className="text-slate-900">{cp.eta_display}</strong></span>
                   </div>
 
                   {/* Weather Risk Classification */}
@@ -207,30 +207,30 @@ export const MapView: React.FC<MapViewProps> = ({
                   </div>
 
                   {/* Weather Observation Details */}
-                  <div className="bg-slate-900 p-2 rounded border border-slate-800 space-y-1 text-[11px]">
+                  <div className="bg-slate-50 p-2 rounded-lg border border-slate-200 space-y-1 text-[11px]">
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 flex items-center">
-                        <Wind className="w-3 h-3 mr-1 text-sky-400" /> Wind:
+                      <span className="text-slate-500 flex items-center font-medium">
+                        <Wind className="w-3 h-3 mr-1 text-blue-600" /> Wind:
                       </span>
-                      <span className="font-mono text-white font-semibold">
+                      <span className="font-mono text-slate-900 font-bold">
                         {windMph !== null ? `${windMph.toFixed(1)} mph` : 'N/A'}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 flex items-center">
-                        <CloudRain className="w-3 h-3 mr-1 text-blue-400" /> Rain:
+                      <span className="text-slate-500 flex items-center font-medium">
+                        <CloudRain className="w-3 h-3 mr-1 text-blue-600" /> Rain:
                       </span>
-                      <span className="font-mono text-white font-semibold">
+                      <span className="font-mono text-slate-900 font-bold">
                         {rainInHr !== null ? `${rainInHr.toFixed(2)} in/hr` : '0.00'}
                       </span>
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <span className="text-slate-400 flex items-center">
-                        <Snowflake className="w-3 h-3 mr-1 text-teal-300" /> Snow:
+                      <span className="text-slate-500 flex items-center font-medium">
+                        <Snowflake className="w-3 h-3 mr-1 text-sky-600" /> Snow:
                       </span>
-                      <span className="font-mono text-white font-semibold">
+                      <span className="font-mono text-slate-900 font-bold">
                         {snowInHr !== null ? `${snowInHr.toFixed(2)} in/hr` : '0.00'}
                       </span>
                     </div>
@@ -238,7 +238,7 @@ export const MapView: React.FC<MapViewProps> = ({
 
                   {/* Segment Mileage */}
                   {cp.segment_miles !== undefined && (
-                    <div className="text-[10px] text-slate-400 pt-0.5">
+                    <div className="text-[10px] text-slate-500 pt-0.5">
                       Represents {cp.segment_miles.toFixed(1)} corridor miles.
                     </div>
                   )}
@@ -250,24 +250,24 @@ export const MapView: React.FC<MapViewProps> = ({
       </MapContainer>
 
       {/* Map Legend Overlay */}
-      <div className="absolute bottom-4 right-4 z-20 bg-slate-900/95 backdrop-blur border border-slate-800 p-3 rounded-lg shadow-xl text-xs text-slate-200 pointer-events-auto max-w-[240px]">
-        <div className="font-semibold text-white mb-1.5 flex items-center justify-between">
+      <div className="absolute bottom-4 right-4 z-20 bg-white/95 backdrop-blur-sm border border-slate-200 p-3 rounded-lg shadow-md text-xs text-slate-700 pointer-events-auto max-w-[240px]">
+        <div className="font-bold text-slate-900 mb-1.5 flex items-center justify-between">
           <span>Route & Risk Legend</span>
         </div>
 
         {/* Routes */}
-        <div className="space-y-1 mb-2 border-b border-slate-800 pb-2">
+        <div className="space-y-1 mb-2 border-b border-slate-200 pb-2">
           {routes.map((r, i) => (
             <div
               key={r.id}
               onClick={() => onSelectRoute(r.id)}
-              className="flex items-center space-x-2 cursor-pointer hover:text-white"
+              className="flex items-center space-x-2 cursor-pointer hover:text-slate-900"
             >
               <span
                 className="w-3 h-1.5 rounded-full"
                 style={{ backgroundColor: ROUTE_COLORS[i % ROUTE_COLORS.length] }}
               ></span>
-              <span className={`truncate text-[11px] ${r.id === selectedRouteId ? 'font-bold text-white' : 'text-slate-400'}`}>
+              <span className={`truncate text-[11px] ${r.id === selectedRouteId ? 'font-bold text-slate-900' : 'text-slate-600'}`}>
                 {r.name} {r.is_recommended ? '★' : ''}
               </span>
             </div>
@@ -292,7 +292,7 @@ export const MapView: React.FC<MapViewProps> = ({
             <span className="w-2.5 h-2.5 rounded-full bg-[#ef4444]"></span>
             <span>Severe</span>
           </div>
-          <div className="flex items-center space-x-1.5 col-span-2 text-red-300 font-semibold">
+          <div className="flex items-center space-x-1.5 col-span-2 text-red-700 font-semibold">
             <span className="w-2.5 h-2.5 rounded-full bg-[#7f1d1d] border border-red-500"></span>
             <span>No Travel Hazard</span>
           </div>

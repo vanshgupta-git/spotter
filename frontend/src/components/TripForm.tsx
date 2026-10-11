@@ -139,19 +139,19 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl text-slate-200">
-      <div className="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-        <h2 className="text-base font-semibold text-white flex items-center">
-          <Navigation className="w-4 h-4 mr-2 text-emerald-400" />
+    <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs text-slate-800">
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
+        <h2 className="text-base font-bold text-slate-900 flex items-center">
+          <Navigation className="w-4 h-4 mr-2 text-blue-600" />
           Dispatch Trip Parameters
         </h2>
-        <span className="text-xs text-slate-400">Step 1: Configure Corridor</span>
+        <span className="text-xs text-slate-400 font-medium">Corridor Setup</span>
       </div>
 
       {/* Preset Corridor Shortcuts */}
       <div className="mb-4">
-        <label className="text-xs font-medium text-slate-400 mb-1.5 flex items-center">
-          <Sparkles className="w-3.5 h-3.5 mr-1 text-amber-400" />
+        <label className="text-xs font-semibold text-slate-600 mb-1.5 flex items-center">
+          <Sparkles className="w-3.5 h-3.5 mr-1 text-amber-500" />
           Quick Test Corridors:
         </label>
         <div className="flex flex-wrap gap-1.5">
@@ -160,7 +160,7 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
               key={idx}
               type="button"
               onClick={() => applyPreset(p)}
-              className="text-xs px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition-colors"
+              className="text-xs px-2.5 py-1 rounded-md bg-slate-100 hover:bg-slate-200 text-slate-700 hover:text-slate-900 border border-slate-200 transition-colors font-medium shadow-2xs"
             >
               {p.name}
             </button>
@@ -169,8 +169,8 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
       </div>
 
       {validationError && (
-        <div className="mb-4 p-3 rounded-lg bg-red-950/60 border border-red-800 text-red-200 text-xs flex items-center">
-          <AlertCircle className="w-4 h-4 mr-2 text-red-400 shrink-0" />
+        <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-800 text-xs flex items-center">
+          <AlertCircle className="w-4 h-4 mr-2 text-red-500 shrink-0" />
           <span>{validationError}</span>
         </div>
       )}
@@ -178,11 +178,11 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Origin Field */}
         <div className="relative">
-          <label htmlFor="origin-input" className="block text-xs font-medium text-slate-300 mb-1">
+          <label htmlFor="origin-input" className="block text-xs font-semibold text-slate-700 mb-1">
             Origin Location
           </label>
           <div className="relative">
-            <MapPin className="w-4 h-4 absolute left-3 top-3 text-emerald-400" />
+            <MapPin className="w-4 h-4 absolute left-3 top-3 text-emerald-600" />
             <input
               id="origin-input"
               type="text"
@@ -193,13 +193,13 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
               }}
               onFocus={() => setShowOriginDropdown(true)}
               placeholder="e.g. Chicago, IL or 41.8781, -87.6298"
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+              className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors"
               required
             />
           </div>
           {/* Autocomplete Dropdown */}
           {showOriginDropdown && originSuggestions.length > 0 && (
-            <div className="absolute z-30 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-2xl max-h-48 overflow-y-auto">
+            <div className="absolute z-30 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl max-h-48 overflow-y-auto">
               {originSuggestions.map((s, idx) => (
                 <div
                   key={idx}
@@ -207,10 +207,10 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
                     setOrigin(s.display_name);
                     setShowOriginDropdown(false);
                   }}
-                  className="px-3 py-2 text-xs text-slate-200 hover:bg-slate-700 cursor-pointer border-b border-slate-750 last:border-none"
+                  className="px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 cursor-pointer border-b border-slate-100 last:border-none"
                 >
-                  <span className="font-semibold text-white">{s.name}</span>
-                  <span className="text-slate-400 ml-1.5">{s.display_name}</span>
+                  <span className="font-semibold text-slate-900">{s.name}</span>
+                  <span className="text-slate-500 ml-1.5">{s.display_name}</span>
                 </div>
               ))}
             </div>
@@ -219,11 +219,11 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
 
         {/* Destination Field */}
         <div className="relative">
-          <label htmlFor="dest-input" className="block text-xs font-medium text-slate-300 mb-1">
+          <label htmlFor="dest-input" className="block text-xs font-semibold text-slate-700 mb-1">
             Destination Location
           </label>
           <div className="relative">
-            <MapPin className="w-4 h-4 absolute left-3 top-3 text-sky-400" />
+            <MapPin className="w-4 h-4 absolute left-3 top-3 text-blue-600" />
             <input
               id="dest-input"
               type="text"
@@ -234,13 +234,13 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
               }}
               onFocus={() => setShowDestDropdown(true)}
               placeholder="e.g. New York, NY or 40.7128, -74.0060"
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+              className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-sm text-slate-900 placeholder-slate-400 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors"
               required
             />
           </div>
           {/* Autocomplete Dropdown */}
           {showDestDropdown && destSuggestions.length > 0 && (
-            <div className="absolute z-30 mt-1 w-full bg-slate-800 border border-slate-700 rounded-lg shadow-2xl max-h-48 overflow-y-auto">
+            <div className="absolute z-30 mt-1 w-full bg-white border border-slate-200 rounded-lg shadow-xl max-h-48 overflow-y-auto">
               {destSuggestions.map((s, idx) => (
                 <div
                   key={idx}
@@ -248,10 +248,10 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
                     setDestination(s.display_name);
                     setShowDestDropdown(false);
                   }}
-                  className="px-3 py-2 text-xs text-slate-200 hover:bg-slate-700 cursor-pointer border-b border-slate-750 last:border-none"
+                  className="px-3 py-2 text-xs text-slate-700 hover:bg-slate-50 cursor-pointer border-b border-slate-100 last:border-none"
                 >
-                  <span className="font-semibold text-white">{s.name}</span>
-                  <span className="text-slate-400 ml-1.5">{s.display_name}</span>
+                  <span className="font-semibold text-slate-900">{s.name}</span>
+                  <span className="text-slate-500 ml-1.5">{s.display_name}</span>
                 </div>
               ))}
             </div>
@@ -260,17 +260,17 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
 
         {/* Departure Date and Time */}
         <div>
-          <label htmlFor="dep-time-input" className="block text-xs font-medium text-slate-300 mb-1">
+          <label htmlFor="dep-time-input" className="block text-xs font-semibold text-slate-700 mb-1">
             Departure Date & Time
           </label>
           <div className="relative">
-            <Calendar className="w-4 h-4 absolute left-3 top-3 text-amber-400" />
+            <Calendar className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
             <input
               id="dep-time-input"
               type="datetime-local"
               value={departureTime}
               onChange={(e) => setDepartureTime(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+              className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors font-mono"
               required
             />
           </div>
@@ -279,15 +279,15 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
         {/* Load Weight */}
         <div>
           <div className="flex justify-between items-center mb-1">
-            <label className="block text-xs font-medium text-slate-300">
+            <label className="block text-xs font-semibold text-slate-700">
               Truck Load Weight (lbs)
             </label>
-            <span className="text-xs text-slate-400 font-mono">
+            <span className="text-xs text-slate-500 font-mono font-semibold">
               {Number(loadWeight).toLocaleString()} lbs
             </span>
           </div>
           <div className="relative">
-            <Weight className="w-4 h-4 absolute left-3 top-3 text-purple-400" />
+            <Weight className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
             <input
               type="number"
               min="0"
@@ -296,16 +296,16 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
               value={loadWeight}
               onChange={(e) => setLoadWeight(Number(e.target.value))}
               placeholder="e.g. 40000"
-              className="w-full bg-slate-950 border border-slate-700 rounded-lg pl-9 pr-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500 font-mono"
+              className="w-full bg-slate-50 border border-slate-300 rounded-lg pl-9 pr-3 py-2 text-sm text-slate-900 focus:bg-white focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 transition-colors font-mono"
               required
             />
           </div>
           {/* Load Threshold Reference Guide */}
-          <div className="mt-1.5 flex justify-between text-[11px] text-slate-400">
-            <span className={loadWeight > 40000 ? "text-amber-400 font-medium" : ""}>
+          <div className="mt-1.5 flex justify-between text-[11px] text-slate-500">
+            <span className={loadWeight > 40000 ? "text-amber-600 font-semibold" : ""}>
               &gt;40k lb (Severe Wind Rule)
             </span>
-            <span className={loadWeight > 30000 ? "text-red-400 font-medium" : ""}>
+            <span className={loadWeight > 30000 ? "text-red-600 font-semibold" : ""}>
               &gt;30k lb (No-Travel Wind Rule)
             </span>
           </div>
@@ -313,7 +313,7 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
 
         {/* Checkpoint Sampling Interval */}
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-700 mb-1.5">
             Checkpoint Sampling Interval
           </label>
           <div className="grid grid-cols-3 gap-2">
@@ -324,8 +324,8 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
                 onClick={() => setIntervalMiles(miles)}
                 className={`py-2 text-xs font-medium rounded-lg border transition-all ${
                   intervalMiles === miles
-                    ? 'bg-emerald-600/20 border-emerald-500 text-emerald-300 font-bold'
-                    : 'bg-slate-950 border-slate-800 text-slate-400 hover:bg-slate-800'
+                    ? 'bg-blue-50 border-blue-600 text-blue-700 font-bold shadow-2xs'
+                    : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
                 }`}
               >
                 {miles} Miles
@@ -341,12 +341,12 @@ export const TripForm: React.FC<TripFormProps> = ({ onSubmit, isLoading }) => {
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full mt-2 py-3 px-4 rounded-lg bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 text-white font-semibold text-sm shadow-lg hover:shadow-emerald-600/20 transition-all flex items-center justify-center space-x-2"
+          className="w-full mt-2 py-2.5 px-4 rounded-lg bg-blue-600 hover:bg-blue-700 disabled:bg-slate-200 disabled:text-slate-400 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center space-x-2"
         >
           {isLoading ? (
             <>
               <Loader2 className="w-4 h-4 animate-spin text-white" />
-              <span>Analyzing Routes & Weather...</span>
+              <span>Analyzing Corridors & Road Weather...</span>
             </>
           ) : (
             <>
